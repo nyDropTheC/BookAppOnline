@@ -1,5 +1,7 @@
 package BackendProg.BookAppWeb;
 
+import java.util.ArrayList;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,10 +20,14 @@ public class BookAppWebApplication {
 	public CommandLineRunner demo() {
 		return (args) -> {
 			System.out.println("Hello from bookapponline!");
-			
-			OpenAiComms comms = new OpenAiComms();
+			ArrayList<OpenAiComms> commsTestList = new ArrayList<>();
+			for(int i = 1; i <= 8; i++) {
+				OpenAiComms comms = new OpenAiComms();
 
-			System.out.println(comms.getBookRecommendationText(null, null));
+				System.out.println(comms.getBookRecommendationText(null, null));
+			}
+			
+			
 		};
 	}
 }
