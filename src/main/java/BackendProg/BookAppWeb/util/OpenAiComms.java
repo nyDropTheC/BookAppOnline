@@ -12,4 +12,8 @@ public class OpenAiComms {
     public OpenAiService getService() {
         return remoteAiService;
     }
+
+    public String getBookRecommendationText(String bookName, String bookAuthors) {
+        return "";
+    }
 }
