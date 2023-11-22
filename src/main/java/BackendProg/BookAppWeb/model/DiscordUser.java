@@ -1,39 +1,46 @@
 package BackendProg.BookAppWeb.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class DiscordUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    private long localId;
 
     @Column(unique = true)
-    String discordId;
+    private String discordId;
 
     @Column
-    String name;
+    private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Book> books;
 
     public DiscordUser() {
 
     }
 
     public DiscordUser(long id, String discordId, String name) {
-        this.id = id;
+        this.localId = id;
         this.discordId = discordId;
         this.name = name;
     }
 
-    public long getId() {
-        return id;
+    public long getLocalId() {
+        return localId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setLocalId(long id) {
+        this.localId = id;
     }
 
     public String getDiscordId() {
@@ -50,5 +57,13 @@ public class DiscordUser {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

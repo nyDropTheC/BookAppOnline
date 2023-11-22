@@ -5,24 +5,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    private long id;
 
     @Column
-    String title;
+    private String title;
 
     @Column
-    String author;
+    private String author;
 
     @Column
-    String aiGeneratedDesc;
+    private String aiGeneratedDesc;
 
     @Column
-    long descRefreshCount;
+    private long descRefreshCount;
+
+    @ManyToOne
+    @JoinColumn(name="localid")
+    private DiscordUser user;
 
     public long getId() {
         return id;
@@ -64,20 +70,29 @@ public class Book {
         this.descRefreshCount = descRefreshCount;
     }
 
+    public DiscordUser getUser() {
+        return user;
+    }
+
+    public void setUser(DiscordUser user) {
+        this.user = user;
+    }
+
     public Book() {
         
     }
 
-    public Book(long id, String title, String author, String aiGeneratedDesc, long descRefreshCount) {
+    public Book(long id, String title, String author, String aiGeneratedDesc, long descRefreshCount, DiscordUser user) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.aiGeneratedDesc = aiGeneratedDesc;
         this.descRefreshCount = descRefreshCount;
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + "]";
+        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", user=" + (user != null ? user.getDiscordId() : "none") + "]";
     }
 }
