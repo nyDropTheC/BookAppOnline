@@ -26,8 +26,13 @@ public class OpenAiComms {
         List<ChatMessage> messages = new ArrayList<>();
 
         messages.add(new ChatMessage(
-            ChatMessageRole.USER.value(), 
-            "Hello there! Please introduce yourself in detail."
+            ChatMessageRole.SYSTEM.value(), 
+            "You are a bot meant to summarize books in an engaging, entertaining and enticing way."
+        ));
+
+        messages.add(new ChatMessage(
+            ChatMessageRole.USER.value(),
+            String.format("Please summarize the book %s by the author(s) %s for me. Make the summary interesting and entertaining. Separate the summary into paragraphs.", bookName, bookAuthors)
         ));
 
         // Could probably add something to customize the used model, maybe someone will want to shell out the cash for GPT-4 lol

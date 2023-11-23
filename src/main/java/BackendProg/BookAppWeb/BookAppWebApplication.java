@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import BackendProg.BookAppWeb.model.Book;
 import BackendProg.BookAppWeb.util.OpenAiComms;
 
 @SpringBootApplication
@@ -21,13 +22,16 @@ public class BookAppWebApplication {
 		return (args) -> {
 			System.out.println("Hello from bookapponline!");
 			ArrayList<OpenAiComms> commsTestList = new ArrayList<>();
-			for(int i = 1; i <= 8; i++) {
-				OpenAiComms comms = new OpenAiComms();
+			
+			Book[] books = new Book[]{ 
+				new Book(1, "Worm", "Wildbow", "", 0, null),
+				new Book(2, "Skin Game", "Jim Butcher", "", 0, null)
+			};
 
-				System.out.println(comms.getBookRecommendationText(null, null));
+			for(int i = 1; i <= 2; i++) {
+				commsTestList.add(new OpenAiComms());
+				System.out.println(commsTestList.getLast().getBookRecommendationText(books[i - 1].getTitle(), books[i - 1].getAuthor()));
 			}
-			
-			
 		};
 	}
 }
