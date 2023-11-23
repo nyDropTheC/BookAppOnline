@@ -26,6 +26,9 @@ public class Book {
     @Column
     private long descRefreshCount;
 
+    @Column
+    private boolean isRead;
+
     @ManyToOne
     @JoinColumn(name="localid")
     private DiscordUser user;
@@ -68,6 +71,14 @@ public class Book {
 
     public void setDescRefreshCount(long descRefreshCount) {
         this.descRefreshCount = descRefreshCount;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean isRead) {
+        this.isRead = isRead;
     }
 
     public DiscordUser getUser() {
