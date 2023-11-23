@@ -12,6 +12,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
+        // oauth2 crap goes here
         return http.build();
     }
 }
