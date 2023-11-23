@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DiscordAuthController {
-    @GetMapping("/auth")
+    @GetMapping("/")
     String authPage() {
-        return "Auth page placeholder";
+        return "We reached this!";
     }
 }
