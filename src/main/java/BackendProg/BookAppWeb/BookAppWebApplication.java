@@ -1,14 +1,9 @@
 package BackendProg.BookAppWeb;
 
-import java.util.ArrayList;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import BackendProg.BookAppWeb.model.Book;
-import BackendProg.BookAppWeb.util.OpenAiComms;
 
 @SpringBootApplication
 public class BookAppWebApplication {
