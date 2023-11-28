@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head>
+        <title>BookApp</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+
+    <body>
+        <h1>Main page</h1>
+        <p>
+            <span>Logged in as <span sec:authentication="name"></span><br>Your Discord ID is <span sec:authentication="principal.attributes['id']"></span></span>
+            <span>My pages</span>
+        </p>
+
+        <div>
+            <p>Most read books</p>
+        </div>
+    </body>
+</html>
