@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import BackendProg.BookAppWeb.model.Book;
-import BackendProg.BookAppWeb.model.DiscordUser;
 
 public interface BookRepository extends CrudRepository<Book, Long> {
-    List<Book> findByUser(DiscordUser user);
+    List<Book> findByDiscordUser(String user);
 }

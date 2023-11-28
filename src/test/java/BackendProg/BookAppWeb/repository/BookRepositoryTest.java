@@ -2,7 +2,6 @@ package BackendProg.BookAppWeb.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 
 import BackendProg.BookAppWeb.model.Book;
-import BackendProg.BookAppWeb.model.DiscordUser;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -21,15 +19,12 @@ public class BookRepositoryTest {
     @Autowired
     BookRepository bookRepository;
 
-    @Autowired
-    DiscordUserRepository userRepository;
-
-    Book makeTestBook(String title, String author, DiscordUser user) {
+    Book makeTestBook(String title, String author, String user) {
         Book book = new Book();
 
         book.setTitle(title);
         book.setAuthor(author);
-        book.setUser(user);
+        book.setDiscordUser(user);
 
         return book;
     }
@@ -43,12 +38,8 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void canAddUserAndFindBookByUser() {
-        DiscordUser testUser = new DiscordUser();
-
-        testUser = userRepository.save(testUser);
-
-        assertNotNull(testUser.getLocalId());
+    public void canFindBookByUser() {
+        String testUser = "349943898439843";
 
         ArrayList<Book> books = new ArrayList<>();
 
@@ -58,7 +49,7 @@ public class BookRepositoryTest {
 
         bookRepository.saveAll(books);
 
-        List<Book> booksFound = bookRepository.findByUser(testUser);
+        List<Book> booksFound = bookRepository.findByDiscordUser(testUser);
 
         assertNotEquals(booksFound.size(), 0);
 

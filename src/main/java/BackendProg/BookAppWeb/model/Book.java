@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -29,9 +27,10 @@ public class Book {
     @Column
     private boolean isRead;
 
-    @ManyToOne
-    @JoinColumn(name="localid")
-    private DiscordUser user;
+    // I'm dumb and couldn't figure out a way to store OAuth2 crap in the database, so this meme it is
+    // It's completely retarded
+    @Column
+    private String discordUser;
 
     public long getId() {
         return id;
@@ -81,29 +80,29 @@ public class Book {
         this.isRead = isRead;
     }
 
-    public DiscordUser getUser() {
-        return user;
+    public String getDiscordUser() {
+        return discordUser;
     }
 
-    public void setUser(DiscordUser user) {
-        this.user = user;
+    public void setDiscordUser(String user) {
+        this.discordUser = user;
     }
 
     public Book() {
         
     }
 
-    public Book(long id, String title, String author, String aiGeneratedDesc, long descRefreshCount, DiscordUser user) {
+    public Book(long id, String title, String author, String aiGeneratedDesc, long descRefreshCount, String user) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.aiGeneratedDesc = aiGeneratedDesc;
         this.descRefreshCount = descRefreshCount;
-        this.user = user;
+        this.discordUser = user;
     }
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", user=" + (user != null ? user.getDiscordId() : "none") + "]";
+        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", user=" + (discordUser != null ? discordUser : "none") + "]";
     }
 }
