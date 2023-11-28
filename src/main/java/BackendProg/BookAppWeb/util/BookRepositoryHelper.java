@@ -57,7 +57,7 @@ class SortableBook {
 
 public class BookRepositoryHelper {
     // this is cringe
-    static List<SortableBook> distinctReadBookTopTenList(List<Book> books) {
+    public static List<SortableBook> distinctReadBookTopTenList(List<Book> books) {
         HashMap<BookEntry, Integer> collection = new HashMap<>();
         
         for(Book n : books) {
