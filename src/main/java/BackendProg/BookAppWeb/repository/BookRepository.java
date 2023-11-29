@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import BackendProg.BookAppWeb.model.Book;
 
 public interface BookRepository extends CrudRepository<Book, Long> {
-    List<Book> findByDiscordUser(String user);
-    List<Book> findByIsRead(boolean read);
+    public List<Book> findByDiscordUser(String user);
+    public List<Book> findByIsRead(boolean read);
 }

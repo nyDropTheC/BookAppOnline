@@ -8,16 +8,22 @@ import java.util.List;
 import BackendProg.BookAppWeb.model.Book;
 
 class BookEntry {
-    private final String bookName;
+    private final String bookTitle;
+    private final String authorName;
     private final String bookHashedName;
 
     public BookEntry(Book book) {
-        this.bookName = book.getTitle();
-        this.bookHashedName = this.bookName.trim().toLowerCase();
+        this.bookTitle = book.getTitle();
+        this.authorName = book.getAuthor();
+        this.bookHashedName = this.bookTitle.trim().toLowerCase() + this.authorName.trim().toLowerCase();
     }
 
-    public String getBookName() {
-        return bookName;
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
     @Override
@@ -38,16 +44,22 @@ class BookEntry {
 }
 
 class SortableBook {
-    private final String bookName;
+    private final String bookTitle;
+    private final String authorName;
     private final Integer readCount;
 
     public SortableBook(BookEntry entry, Integer readCount) {
-        this.bookName = entry.getBookName();
+        this.bookTitle = entry.getBookTitle();
+        this.authorName = entry.getAuthorName();
         this.readCount = readCount;
     }
 
-    public String getBookName() {
-        return bookName;
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
     public Integer getReadCount() {
@@ -61,11 +73,9 @@ public class BookRepositoryHelper {
         HashMap<BookEntry, Integer> collection = new HashMap<>();
         
         for(Book n : books) {
-            if(n.isRead()) {
-                BookEntry e = new BookEntry(n);
+            BookEntry e = new BookEntry(n);
 
-                collection.merge(e, 1, Integer::sum);
-            }
+            collection.merge(e, 1, (a, b) -> a + b);
         }
         ArrayList<SortableBook> returnedBooks = new ArrayList<>();
 

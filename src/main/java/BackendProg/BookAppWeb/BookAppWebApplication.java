@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class BookAppWebApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(BookAppWebApplication.class, args);
 	}
@@ -15,7 +14,7 @@ public class BookAppWebApplication {
 	@Bean
 	public CommandLineRunner demo() {
 		return (args) -> {
-			System.out.println("Hello from bookapponline!");
+			// System.out.println("Hello from bookapponline!");
 			/*ArrayList<OpenAiComms> commsTestList = new ArrayList<>();
 			
 			Book[] books = new Book[]{ 

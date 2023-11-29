@@ -18,7 +18,7 @@ public class OpenAiComms {
         remoteAiService = new OpenAiService(System.getenv("BOOKAPP_OPENAI_KEY"), Duration.ZERO);
     }
 
-    public OpenAiService getService() {
+    private OpenAiService getService() {
         return remoteAiService;
     }
 
@@ -32,7 +32,7 @@ public class OpenAiComms {
 
         messages.add(new ChatMessage(
             ChatMessageRole.USER.value(),
-            String.format("Please summarize the book %s by the author(s) %s for me. Make the summary interesting and entertaining. Separate the summary into paragraphs.", bookName, bookAuthors)
+            String.format("Please summarize the book %s by the author(s) %s for me. Make the summary interesting and entertaining. Separate the summary into paragraphs using two newlines.", bookName, bookAuthors)
         ));
 
         // Could probably add something to customize the used model, maybe someone will want to shell out the cash for GPT-4 lol
@@ -40,11 +40,11 @@ public class OpenAiComms {
                                         .builder()
                                         .model("gpt-3.5-turbo")
                                         .messages(messages)
-                                        .temperature(1.1)
+                                        .temperature(1.01)
                                         .build();
 
         ChatMessage resp = getService().createChatCompletion(req).getChoices().get(0).getMessage();
         
-        return resp.getContent();
+         return resp.getContent();
     }
 }

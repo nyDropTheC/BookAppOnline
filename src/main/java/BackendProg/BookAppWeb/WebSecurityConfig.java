@@ -2,6 +2,7 @@ package BackendProg.BookAppWeb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
@@ -16,6 +17,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -62,13 +64,19 @@ public class WebSecurityConfig {
         // oauth2 crap goes here
         
         http
-            .authorizeHttpRequests((httpSec) -> httpSec.anyRequest().authenticated())
-            .oauth2Login( withDefaults()
-                    //(oauth2) -> oauth2
-                    //    .clientRegistrationRepository(clientRegistrationRepository())
-                    //    .authorizedClientService(authorizedClientService())
-                    //    .loginPage("/oauth2/authorization/discord")
-            ).cors(withDefaults());
+            .authorizeHttpRequests((httpSec) -> 
+                httpSec
+                    .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).permitAll() // retarded bandaid fix
+                    .anyRequest()
+                    .authenticated()
+            )
+            .oauth2Login(withDefaults())
+            .cors(withDefaults())
+            .logout(logout -> 
+                logout
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/")
+            );
         return http.build();
     }
 }

@@ -1,28 +1,25 @@
 package BackendProg.BookAppWeb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import BackendProg.BookAppWeb.model.Book;
 import BackendProg.BookAppWeb.repository.BookRepository;
+import BackendProg.BookAppWeb.util.DiscordIdHelper;
 
 @Controller
 public class UserPageController {
     @Autowired
-    BookRepository bookRepo;
+    private BookRepository bookRepo;
 
     @GetMapping("/user")
-    String userPageController(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        OAuth2AuthenticatedPrincipal principal = (OAuth2AuthenticatedPrincipal)auth.getPrincipal();
-        String discordId = principal.getAttribute("id");
+    public String userPageController(Model model) {
+        String discordId = DiscordIdHelper.getCurrentDiscordUser();
 
         List<Book> booksThisIdHas = bookRepo.findByDiscordUser(discordId);
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import BackendProg.BookAppWeb.model.Book;
@@ -13,10 +14,10 @@ import BackendProg.BookAppWeb.util.BookRepositoryHelper;
 @Controller
 public class GlobalPageController {
     @Autowired
-    BookRepository bookRepo;
+    private BookRepository bookRepo;
 
     @GetMapping("/")
-    String globalPage() {
+    public String globalPage(Model model) {
         List<Book> books = bookRepo.findByIsRead(true);
 
         // THIS IS EVIL
@@ -24,6 +25,8 @@ public class GlobalPageController {
         // I HATE JAVA
         var sortedByReadCount = BookRepositoryHelper.distinctReadBookTopTenList(books); 
         
+        model.addAttribute("sortedByReadCount", sortedByReadCount);
+
         return "global";
     }
 }

@@ -1,0 +1,3 @@
+2023-11-29 21:59:45.849667+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AI_GENERATED_DESC CHARACTER VARYING(255)": "U&'Once upon a time, in a world plagued by supervillains and caped crusaders, th... (2336)"; SQL statement:
+update book set ai_generated_desc=?,author=?,desc_refresh_count=?,discord_user=?,is_read=?,title=? where id=? [22001-224]
