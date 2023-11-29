@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head>
+        <title>BookApp</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+
+    <body>
+        <div>
+            <h1>My pages</h1>
+            <span>Logged in as <span sec:authentication="name"/></span>
+            <span><a href="/">Back</a></span>
+        </div>
+
+        <div>
+            <p>My books</p>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Read</th>
+                    <th></th>
+                </tr>
+
+                <tr th:each="book : ${booksThisIdHas}">
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
