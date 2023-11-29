@@ -39,7 +39,6 @@
 
         const gptTarget = document.getElementById("jsGptTarget");
         const gptRefresh = document.getElementById("jsGptRefreshButton");
-        const discordUser = document.getElementById("jsUserId");
         const activeBookId = document.getElementById("jsBookId");
 
         const makeHtmlParagraphs = (textBlob) => {
@@ -56,9 +55,7 @@
             gptTarget.innerText = 'Please wait for the summary to load...';
 
             // very secure!
-            const textResponse = await fetch(`/api/openai/summarize/${activeBookId.innerText}`, { headers: {
-                Authorization: discordUser.innerText
-            } });
+            const textResponse = await fetch(`/api/openai/summarize/${activeBookId.innerText}`);
 
             const textResult = await textResponse.blob().then(blob => blob.text());
 
