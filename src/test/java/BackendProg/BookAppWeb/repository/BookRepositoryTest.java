@@ -33,7 +33,7 @@ public class BookRepositoryTest {
     @Test
     public void canAddBook() {
         long lenBefore = bookRepository.count();
-        bookRepository.save(makeTestBook("Test", "Test", null, null));
+        bookRepository.save(makeTestBook("Test", "Test", null, true));
 
         assertNotEquals(lenBefore, bookRepository.count());
     }
@@ -44,9 +44,9 @@ public class BookRepositoryTest {
 
         ArrayList<Book> books = new ArrayList<>();
 
-        books.add(makeTestBook("Test1", "Test1", testUser, null));
-        books.add(makeTestBook("Test2", "Test2", testUser, null));
-        books.add(makeTestBook("Test3", "Test3", testUser, null));
+        books.add(makeTestBook("Test1", "Test1", testUser, true));
+        books.add(makeTestBook("Test2", "Test2", testUser, false));
+        books.add(makeTestBook("Test3", "Test3", testUser, true));
 
         bookRepository.saveAll(books);
 
