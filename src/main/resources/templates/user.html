@@ -13,7 +13,7 @@
         </div>
 
         <div>
-            <p>My books</p>
+            <h3>My books</h3>
             <table>
                 <tr>
                     <th>Title</th>
@@ -25,6 +25,10 @@
                 <tr th:each="book : ${booksThisIdHas}">
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.author}"></td>
+                    <td><a th:href="@{/books/{bookId}/toggleRead(bookId=${book.id})}">
+                        <span th:if="${book.isRead}">Read</span>
+                        <span th:unless="${book.isRead}">Unread</span>
+                    </a></td>
                 </tr>
             </table>
         </div>
